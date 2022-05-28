@@ -1,0 +1,184 @@
+h1 {
+    text-align: center;
+    margin: 2rem;
+}
+
+p {
+    font-size: 1.3rem;
+}
+
+body {
+    background-color: mintcream;
+}
+
+main {
+    position: relative;
+    left: 0;
+    right: 0;
+    margin: 0 auto;
+    width: 1000px;
+    height: auto;
+}
+
+/* Splash Page */
+
+.instructions-wrapper {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.instructions {
+    position: absolute;
+    right: 11rem;
+    top: 9rem;
+}
+
+.animated-text-wrapper {
+    position: relative;
+}
+
+.animate-p {
+    position: absolute;
+    left: 22rem;
+    right: 0rem;
+    content: '';
+    animation: typing-p 1.7s steps( 43 );
+    overflow: hidden;
+    white-space: nowrap;
+    /* text-align: center; */
+}
+
+@keyframes typing-p {
+    from {
+        width: 0ch;
+    }
+    to {
+        width: 36ch;
+    }
+}
+
+.players-input-wrapper {
+    position: absolute;
+    left: 11rem;
+    right: 11rem;
+    top: 13rem;
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+    border: none;
+    border-radius: 15px;
+    background-color: powderblue;
+}
+
+.player-number {
+    margin: 1rem auto;
+
+}
+
+.player-number-text{
+    text-align: center;
+}
+
+.one-player, .two-player {
+    width: 300px;
+}
+
+.player-one, .player-two {
+    width: 94%;
+    margin: 1rem auto;
+}
+
+.player-name-text {
+    text-align: center;
+}
+
+.difficulty {
+    margin: 1rem auto;
+}
+
+.difficulty-text {
+    text-align: center;
+}
+
+.btn-easy, .btn-medium, .btn-hard {
+    width: 200px;
+}
+
+.start {
+    margin: 1rem;
+}
+
+.error-message-text {
+    margin: 0rem 1rem;
+    color: rgb(199, 33, 33);
+}
+
+/* Splash Page End */
+
+/* Game Page Start */
+
+.guesses-counter {
+    text-decoration: none;
+    position: relative;
+    text-align: center;
+    padding-bottom: 1rem;
+    font-size: 1.7rem;
+}
+
+.enter-number-text {
+    text-align: center;
+    margin: 2rem 0rem;
+    font-size: 1.7rem;
+}
+
+.guesses-counter::after {
+    position: absolute;
+    content: '';
+    height: 1px;
+    left: 0;
+    right: 0;
+    bottom: 0px;
+    background-color: black;
+} 
+
+.scoreboard-wrapper {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.player-scores-wrapper {
+    display: flex;
+    align-items: center;
+}
+
+.player-one-score, .player-two-score {
+    margin: 0rem 0.5rem;
+    font-size: 1.2rem;
+}
+
+.game-page-wrapper {
+    position: relative;
+}
+
+.main-game-wrapper {
+    position: absolute;
+    top: 10rem;
+    left: 0;
+    right: 0;
+    bottom: 0;
+}
+
+.restart-quit-wrapper, .help-submit-wrapper {
+    margin: 2rem 0rem;
+}
+
+.main-game-function-inner-wrapper {
+    border: none;
+    border-radius: 15px;
+    background-color: powderblue;
+    padding: 2rem;
+}
+
+/* Game Page End */

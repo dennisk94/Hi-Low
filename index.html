@@ -1,0 +1,426 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/4.6.1/css/bootstrap.min.css"
+    />
+    <link rel="stylesheet" href="styles/styles.css" />
+    <title>Hi-Low</title>
+  </head>
+  <body>
+    <main>
+      <h1>Hi-Low</h1>
+      <div class="animated-text-wrapper">
+        <p class="animate-p">Guess the secret number to win!</p>
+      </div>
+
+      <!-- Instructions Modal Start -->
+      <section class="instructions">
+        <button
+          type="button"
+          class="btn btn-outline-info btn-lg instructions-btn"
+          data-toggle="modal"
+          data-target="#instructions"
+        >
+          Instructions
+        </button>
+
+        <div
+          class="modal fade"
+          id="instructions"
+          tabindex="-1"
+          role="dialog"
+          aria-labelledby="instructionsCenter"
+          aria-hidden="true"
+        >
+          <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content">
+              <div class="modal-header">
+                <h2 class="modal-title" id="instructionsCenter">
+                  Instructions
+                </h2>
+                <button
+                  type="button"
+                  class="close"
+                  data-dismiss="modal"
+                  aria-label="Close"
+                >
+                  <span aria-hidden="true">&times;</span>
+                </button>
+              </div>
+              <div class="modal-body">
+                <article class="rules">
+                  <h3 class="rules-heading">Rules</h3>
+                  <p class="rules-text">
+                    Guess a secret number in as few tries as possible. After you
+                    input a number, press the guess button and you will be told
+                    whether it is higher or lower than the secret number. You
+                    can also press the help button to see how close your number
+                    is to the secret number
+                  </p>
+                </article>
+
+                <article class="one-player">
+                  <h3 class="one-player-heading">1 Player</h3>
+                  <p class="one-player-text">
+                    Choose the difficulty, write your name and press play. The
+                    game will randomly generate a number within the number range
+                    that corresponds with the chosen difficulty level.
+                  </p>
+                </article>
+
+                <article class="two-player">
+                  <h3 class="two-player-heading">2 Player</h3>
+                  <p class="two-player-text">
+                    Select the difficulty and write your names. One player will
+                    choose a number within the appropriate difficulty range and
+                    the other player will try to guess the secret number.
+                  </p>
+                </article>
+
+                <article class="difficulty">
+                  <h3 class="difficulty-heading">Difficulty Levels</h3>
+                  <p class="difficulty-text">
+                    Easy: 1-1024, Medium: 1-2048, Hard: 1-4096
+                  </p>
+                </article>
+              </div>
+              <div class="modal-footer">
+                <button
+                  type="button"
+                  class="btn btn-outline-dark btn-sm"
+                  data-dismiss="modal"
+                >
+                  Close
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+      <!-- Instructions Modal End -->
+      <!-- Splash Page Start -->
+
+      <div class="players-input-wrapper" id="splash-page">
+        <section class="player-number">
+          <p class="player-number-text">How many players?</p>
+          <button
+            class="btn btn-outline-primary btn-lg one-player num-players-selection"
+            id="player-one-btn"
+            value="one-player"
+          >
+            One
+          </button>
+          <button
+            class="btn btn-outline-primary btn-lg two-player num-players-selection"
+            id="player-two-btn"
+            value="two-player"
+          >
+            Two
+          </button>
+        </section>
+
+        <section class="player-names">
+          <p class="player-name-text">Player Names</p>
+          <input
+            class="form-control form-control-lg player-one"
+            type="text"
+            placeholder="Player 1 Name"
+            id="player-one-name"
+          />
+          <input
+            class="form-control form-control-lg player-two"
+            id="player-two-name"
+            type="text"
+            placeholder="Player 2 Name"
+            style="display: none"
+          />
+        </section>
+
+        <section class="difficulty">
+          <p class="difficulty-text">Difficulty</p>
+          <button
+            class="btn btn-outline-primary btn-lg btn-easy difficulty-btns"
+            value="easy"
+          >
+            Easy
+          </button>
+          <button
+            class="btn btn-outline-primary btn-lg btn-medium difficulty-btns"
+            value="medium"
+          >
+            Mediun
+          </button>
+          <button
+            class="btn btn-outline-primary btn-lg btn-hard difficulty-btns"
+            value="hard"
+          >
+            Hard
+          </button>
+        </section>
+
+        <section class="start">
+          <button
+            class="btn btn-outline-success btn-lg btn-block"
+            id="start-game"
+          >
+            Start Game
+          </button>
+        </section>
+
+        <p class="error-message-text" id="error-message"></p>
+      </div>
+
+      <!-- Splash Page End -->
+
+      <!-- Game Page Start -->
+      <div class="game-page-wrapper" style="display: none">
+        <h1 class="difficulty-range"></h1>
+
+        <div class="main-game-wrapper">
+          <div class="main-game-function-wrapper">
+            <div class="main-game-function-inner-wrapper">
+              <div class="guesses-counter">
+                Guesses: <span id="guess-counter"></span>
+              </div>
+              <section class="scoreboard-wrapper" id="scoreboard">
+                <h2 class="scoreboard-heading">Scoreboard</h2>
+                <div class="player-scores-wrapper">
+                  <div
+                    class="player-one-score"
+                    id="scoreboard-player-one"
+                  ></div>
+
+                  <div
+                    class="player-two-score"
+                    id="scoreboard-player-two"
+                    style="display: none"
+                  ></div>
+                </div>
+              </section>
+              <div class="enter-number-text">Enter a number</div>
+              <input
+                class="form-control form-control-lg"
+                type="text"
+                id="guess-input"
+              />
+              <div id="guess-message"></div>
+              <section class="help-submit-wrapper">
+                <button
+                  class="btn btn-outline-primary btn-lg btn-block"
+                  id="help"
+                >
+                  Help
+                </button>
+                <button
+                  class="btn btn-outline-success btn-lg btn-block"
+                  id="submit"
+                >
+                  Submit
+                </button>
+              </section>
+            </div>
+          </div>
+          <section class="restart-quit-wrapper">
+            <button
+              class="btn btn-outline-primary btn-lg btn-block"
+              id="restart"
+            >
+              Restart
+            </button>
+            <button class="btn btn-outline-danger btn-lg btn-block" id="quit">
+              Quit
+            </button>
+          </section>
+        </div>
+      </div>
+
+      <!-- Window Modal for when guess is correct -->
+      <div
+        class="modal fade"
+        id="win"
+        tabindex="-1"
+        role="dialog"
+        aria-labelledby="winCenter"
+        aria-hidden="true"
+      >
+        <div class="modal-dialog modal-dialog-centered" role="document">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h2 class="modal-title" id="winCenter">Winner!</h2>
+              <button
+                type="button"
+                class="close"
+                data-dismiss="modal"
+                aria-label="Close"
+              >
+                <span aria-hidden="true">&times;</span>
+              </button>
+            </div>
+            <div class="modal-body">
+              <article class="win-modal-text">
+                <p class="win-modal-p">
+                  Congratulations! You have correctly guessed the secret
+                  number!🎉 If you would like to play again, select the restart
+                  button. 🔁
+                </p>
+              </article>
+            </div>
+            <div class="modal-footer">
+              <button
+                type="button"
+                class="btn btn-outline-dark btn-sm"
+                data-dismiss="modal"
+                id="winRestart"
+              >
+                Restart
+              </button>
+              <button
+                type="button"
+                class="btn btn-outline-danger btn-sm"
+                data-dismiss="modal"
+                id="winClose"
+              >
+                Quit
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Window Modal for 2 players -->
+
+      <div
+        class="modal fade"
+        id="two-player-modal"
+        tabindex="-1"
+        role="dialog"
+        aria-labelledby="twoPlayerCenter"
+        aria-hidden="true"
+      >
+        <div class="modal-dialog modal-dialog-centered" role="document">
+          <div class="modal-content">
+            <div class="modal-header"></div>
+            <div class="modal-body">
+              <article class="win-modal-text">
+                <p class="win-modal-p">
+                  <span class="two-player-player-1-name"></span>, enter a secret
+                  number for <span class="two-player-player-2-name"></span> to
+                  guess
+                </p>
+              </article>
+              <input
+                class="form-control form-control-lg"
+                type="text"
+                id="player-one-secret-number"
+              />
+            </div>
+            <div class="modal-footer">
+              <button
+                type="button"
+                class="btn btn-outline-dark btn-sm"
+                data-dismiss="modal"
+                id="two-player-secret-number-submit"
+              >
+                Submit
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Window modal for player 2 to set a secret number -->
+
+      <div
+        class="modal fade"
+        id="two-player-secret-number-modal"
+        tabindex="-1"
+        role="dialog"
+        aria-labelledby="twoPlayerSecretNumber"
+        aria-hidden="true"
+      >
+        <div class="modal-dialog modal-dialog-centered" role="document">
+          <div class="modal-content">
+            <div class="modal-header"></div>
+            <div class="modal-body">
+              <article class="win-modal-text">
+                <p class="win-modal-p">
+                  Wondeful! You guessed the secret number!
+                  <span class="two-player-player-2-name"></span>, enter a secret
+                  number for <span class="two-player-player-1-name"></span> to
+                  guess
+                </p>
+              </article>
+              <input
+                class="form-control form-control-lg"
+                type="text"
+                id="player-two-secret-number"
+              />
+            </div>
+            <div class="modal-footer">
+              <button
+                type="button"
+                class="btn btn-outline-dark btn-sm"
+                data-dismiss="modal"
+                id="player-two-secret-number-submit"
+              >
+                Submit
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Window modal for when both players have had a turn -->
+      <div
+        class="modal fade"
+        id="bothPlayersPlayed"
+        tabindex="-1"
+        role="dialog"
+        aria-labelledby="bothPlayersPlayed"
+        aria-hidden="true"
+      >
+        <div class="modal-dialog modal-dialog-centered" role="document">
+          <div class="modal-content">
+            <div class="modal-header"></div>
+            <div class="modal-body">
+              <article class="round-complete-text">
+                <p class="round-complete-modal-p">
+                  Both player 1 and player 2 have each played a turn. Would you
+                  like to play another round or quit for now?
+                </p>
+              </article>
+            </div>
+            <div class="modal-footer">
+              <button
+                type="button"
+                class="btn btn-outline-dark btn-sm"
+                data-dismiss="modal"
+                id="round-complete-restart"
+              >
+                Restart
+              </button>
+              <button
+                type="button"
+                class="btn btn-outline-danger btn-sm"
+                data-dismiss="modal"
+                id="round-complete-quit"
+              >
+                Quit
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Game Page End -->
+    </main>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/4.6.1/js/bootstrap.min.js"></script>
+    <script src="scripts/scripts.js"></script>
+  </body>
+</html>
