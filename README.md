@@ -2,7 +2,7 @@
 
 A browser based number guessing game using jQuery, JavaScript and object-oriented programming principles. Comes with difficulty selection.
 
-View the Game: [Live Site](https://denniskim.codes/hi-low/](https://denniskimweb.ca/hi-low-game/))
+View the Game: [Live Site](https://denniskimweb.ca/hi-low-game/)
 
 ## Tech Stack
 
